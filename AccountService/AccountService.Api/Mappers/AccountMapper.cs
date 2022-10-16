@@ -6,9 +6,6 @@ public static class AccountMapper
 {
     public static Account CreateAccountRequestToAccount()
     {
-        return new Account()
-        {
-
-        };
+        return new Account();
     }
 }

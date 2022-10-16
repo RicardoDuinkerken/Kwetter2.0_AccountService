@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\AccountService.Core\AccountService.Core.csproj" />
+      <ProjectReference Include="..\AccountService.Grpc\AccountService.Grpc.csproj" />
     </ItemGroup>
 
 </Project>

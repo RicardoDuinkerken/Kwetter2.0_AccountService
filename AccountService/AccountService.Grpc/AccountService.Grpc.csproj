@@ -20,4 +20,9 @@
       <ProjectReference Include="..\AccountService.Dal\AccountService.Dal.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Protos\AccountService.proto" />
+      <Protobuf Include="Protos\AccountService.proto" />
+    </ItemGroup>
+
 </Project>
