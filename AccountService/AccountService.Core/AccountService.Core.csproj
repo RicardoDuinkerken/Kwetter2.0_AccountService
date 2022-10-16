@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\AccountService.Dal\AccountService.Dal.csproj" />
+    </ItemGroup>
+
 </Project>
