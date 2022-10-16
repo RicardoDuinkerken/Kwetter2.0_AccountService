@@ -1,11 +1,53 @@
 ﻿using AccountService.Dal.Models;
-
+using AccountService.Grpc;
 namespace AccountService.Api.Mappers;
 
 public static class AccountMapper
 {
-    public static Account CreateAccountRequestToAccount()
+    public static Account CreateAccountRequestToAccount(CreateAccountRequest request)
     {
-        return new Account();
+        return new()
+        {
+            ProfileId = request.ProfileId,
+            Email = request.Email,
+            Username = request.Username
+        };
     }
+    
+    private static Account UpdateAccountRequestToAccount(UpdateAccountRequest request)
+    {
+        return new()
+        {
+            Id = request.Id,
+            ProfileId = request.ProfileId,
+            Email = request.Email,
+            Username = request.Username
+        };
+    }
+
+    public static AccountResponse AccountToAccountResponse(Account account)
+    {
+        return new()
+        {
+            Id = account.Id,
+            ProfileId = account.ProfileId,
+            Email = account.Email,
+            Username = account.Username
+        };
+    }
+
+    public static long DeleteAccountRequestToId(DeleteAccountRequest request)
+    {
+        return request.Id;
+    }
+
+    public static DeleteAccountResponse AccountToDeleteAccountResponse(long accountId)
+    {
+        return new()
+        {
+            Id = accountId
+        };
+    }
+
+
 }
