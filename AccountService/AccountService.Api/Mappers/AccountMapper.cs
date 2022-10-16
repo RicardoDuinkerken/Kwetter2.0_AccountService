@@ -1,6 +1,14 @@
-﻿namespace AccountService.Api.Mappers;
+﻿using AccountService.Dal.Models;
 
-public class AccountMapper
+namespace AccountService.Api.Mappers;
+
+public static class AccountMapper
 {
-    
+    public static Account CreateAccountRequestToAccount()
+    {
+        return new Account()
+        {
+
+        };
+    }
 }
