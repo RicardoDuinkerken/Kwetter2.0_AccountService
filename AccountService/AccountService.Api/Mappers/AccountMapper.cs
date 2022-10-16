@@ -14,7 +14,7 @@ public static class AccountMapper
         };
     }
     
-    private static Account UpdateAccountRequestToAccount(UpdateAccountRequest request)
+    public static Account UpdateAccountRequestToAccount(UpdateAccountRequest request)
     {
         return new()
         {
