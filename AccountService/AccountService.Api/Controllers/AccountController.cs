@@ -71,4 +71,22 @@ public class AccountController : Grpc.AccountService.AccountServiceBase
         }
     }
     
+    public override async Task<AccountResponse> ChangeUsername(ChangeUsernameRequest request,
+        ServerCallContext context)
+    {
+        _logger.LogInformation("ChangeUsername invoked");
+        
+        try
+        {
+            return AccountMapper.AccountToAccountResponse(
+                await _accountService.ChangeUsernameAsync(
+                    AccountMapper.ChangeUsernameRequestToAccount(request)));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("{E}", e);
+            throw new RpcException(new Status(StatusCode.Internal, e.Message));
+        }
+    }
+    
 }

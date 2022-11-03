@@ -21,6 +21,7 @@ public class AccountService : IAccountService
     public async Task<Account> CreateAccountAsync(Account account)
     {
         account = await _accountRepository.CreateAsync(account);
+        account.ProfileId = -1;
         _logger.LogInformation("Account created with id: {Id}", account.Id);
         
         return account;
@@ -40,5 +41,16 @@ public class AccountService : IAccountService
             throw new ArgumentException($"No account found with id: {accountId}");
         
         return accountId;
+    }
+    
+    public async Task<Account> ChangeUsernameAsync(Account account)
+    {
+        Account accountToChange = await _accountRepository.GetByIdAsync(account.Id);
+        accountToChange.Username = account.Username;
+        
+        await _accountRepository.UpdateAsync(accountToChange);
+        _logger.LogInformation("Username changed for account with id: {Id}", account.Id);
+        
+        return accountToChange;
     }
 }

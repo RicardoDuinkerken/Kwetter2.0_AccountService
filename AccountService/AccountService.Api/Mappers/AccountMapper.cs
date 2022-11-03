@@ -8,7 +8,6 @@ public static class AccountMapper
     {
         return new()
         {
-            ProfileId = request.ProfileId,
             Email = request.Email,
             Username = request.Username
         };
@@ -46,6 +45,15 @@ public static class AccountMapper
         return new()
         {
             Id = accountId
+        };
+    }
+
+    public static Account ChangeUsernameRequestToAccount(ChangeUsernameRequest request)
+    {
+        return new Account()
+        {
+            Id = request.Id,
+            Username = request.Username
         };
     }
 

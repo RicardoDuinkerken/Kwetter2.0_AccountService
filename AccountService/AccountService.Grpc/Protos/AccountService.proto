@@ -4,11 +4,11 @@ option csharp_namespace = "AccountService.Grpc";
 service AccountService{
   rpc CreateAccount (CreateAccountRequest) returns (AccountResponse);
   rpc UpdateAccount (UpdateAccountRequest) returns (AccountResponse);
-  rpc DeleteAccount (DeleteAccountRequest) returns (DeleteAccountResponse);  
+  rpc DeleteAccount (DeleteAccountRequest) returns (DeleteAccountResponse); 
+  rpc ChangeUsername (ChangeUsernameRequest) returns (AccountResponse);
 }
 
 message CreateAccountRequest {
-  int64 profileId = 1;
   string email = 2;
   string username = 3;
 }
@@ -22,6 +22,11 @@ message UpdateAccountRequest {
 
 message DeleteAccountRequest {
   int64 id = 1;
+}
+
+message ChangeUsernameRequest {
+  int64 id = 1;
+  string username = 4;
 }
 
 message AccountResponse {
