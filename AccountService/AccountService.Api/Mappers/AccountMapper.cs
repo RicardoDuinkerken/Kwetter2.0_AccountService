@@ -57,5 +57,11 @@ public static class AccountMapper
         };
     }
 
-
+    public static CheckUsernameAvailabilityResponse BoolToCheckAvailabilityUsernameResponse(bool available)
+    {
+        return new()
+        {
+            Available = available
+        };
+    }
 }

@@ -56,7 +56,7 @@ public class AccountController : Grpc.AccountService.AccountServiceBase
     public override async Task<DeleteAccountResponse> DeleteAccount(DeleteAccountRequest request,
         ServerCallContext context)
     {
-        _logger.LogInformation("UpdateAccount invoked");
+        _logger.LogInformation("DeleteAccount invoked");
         
         try
         {
@@ -81,6 +81,23 @@ public class AccountController : Grpc.AccountService.AccountServiceBase
             return AccountMapper.AccountToAccountResponse(
                 await _accountService.ChangeUsernameAsync(
                     AccountMapper.ChangeUsernameRequestToAccount(request)));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("{E}", e);
+            throw new RpcException(new Status(StatusCode.Internal, e.Message));
+        }
+    }
+    
+    public override async Task<CheckUsernameAvailabilityResponse> CheckAvailabilityUsername(CheckAvailabilityUsernameRequest request,
+        ServerCallContext context)
+    {
+        _logger.LogInformation("CheckAvailabilityUsername invoked");
+        
+        try
+        {
+            return AccountMapper.BoolToCheckAvailabilityUsernameResponse(await _accountService.CheckAvailableUsernameAsync(request.Username));
+
         }
         catch (Exception e)
         {

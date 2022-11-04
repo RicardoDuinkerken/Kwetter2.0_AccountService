@@ -53,4 +53,13 @@ public class AccountService : IAccountService
         
         return accountToChange;
     }
+
+    public async Task<bool> CheckAvailableUsernameAsync(string username)
+    {
+        var accounts = await _accountRepository.GetWhereAsync(a => a.Username == username);
+        bool available = accounts.Count < 0;
+        _logger.LogInformation("checked if {Username} is available: {Available}", username, available);
+        
+        return available;
+    }
 }
