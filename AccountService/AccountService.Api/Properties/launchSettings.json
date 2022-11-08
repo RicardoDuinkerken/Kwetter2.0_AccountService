@@ -1,6 +1,6 @@
 ﻿{
   "profiles": {
-    "PassengerService.Api": {
+    "AccountService.Api": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": false,
