@@ -20,8 +20,9 @@ public class AccountService : IAccountService
     
     public async Task<Account> CreateAccountAsync(Account account)
     {
-        account = await _accountRepository.CreateAsync(account);
         account.ProfileId = -1;
+        account = await _accountRepository.CreateAsync(account);
+
         _logger.LogInformation("Account created with id: {Id}", account.Id);
         
         return account;
@@ -57,9 +58,18 @@ public class AccountService : IAccountService
     public async Task<bool> CheckAvailableUsernameAsync(string username)
     {
         var accounts = await _accountRepository.GetWhereAsync(a => a.Username == username);
-        bool available = accounts.Count < 0;
+        bool available = accounts.Count == 0;
         _logger.LogInformation("checked if {Username} is available: {Available}", username, available);
         
         return available;
+    }
+    
+    public async Task<bool> HasProfileAsync(long accountId)
+    {
+        Account account = await _accountRepository.GetByIdAsync(accountId);
+        bool hasProfile = account.ProfileId != -1;
+
+        _logger.LogInformation("checked if {Username} with id {ID} has profile {HasProfile}", account.Username, accountId, hasProfile);
+        return hasProfile;
     }
 }

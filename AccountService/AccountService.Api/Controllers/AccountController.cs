@@ -106,4 +106,21 @@ public class AccountController : Grpc.AccountService.AccountServiceBase
         }
     }
     
+    public override async Task<HasProfileResponse> HasProfile(HasProfileRequest request,
+        ServerCallContext context)
+    {
+        _logger.LogInformation("HasProfile invoked");
+        
+        try
+        {
+            return AccountMapper.BoolToHasProfileResponse(await _accountService.HasProfileAsync(request.AccountId));
+    
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("{E}", e);
+            throw new RpcException(new Status(StatusCode.Internal, e.Message));
+        }
+    }
+    
 }

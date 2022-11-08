@@ -64,4 +64,14 @@ public static class AccountMapper
             Available = available
         };
     }
+    
+    public static HasProfileResponse BoolToHasProfileResponse(bool hasProfile)
+    {
+        return new()
+        {
+            HasProfile = hasProfile
+        };
+    }
+    
+    
 }

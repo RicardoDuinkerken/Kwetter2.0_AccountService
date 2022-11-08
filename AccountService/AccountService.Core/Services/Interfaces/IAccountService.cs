@@ -9,4 +9,5 @@ public interface IAccountService
     Task<long> DeleteAccountAsync(long accountId);
     Task<Account> ChangeUsernameAsync(Account account);
     Task<bool> CheckAvailableUsernameAsync(string username);
+    Task<bool> HasProfileAsync(long accountId);
 }
