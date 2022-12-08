@@ -27,11 +27,13 @@ namespace AccountService.Api;
         public void ConfigureServices(IServiceCollection services)
         {
             //database connection
-            string server = Configuration.GetSection("Mysql").GetValue<string>("Server");
-            string username = Configuration.GetSection("Mysql").GetValue<string>("Username");
-            string password = Configuration.GetSection("Mysql").GetValue<string>("Password");
-            string database = Configuration.GetSection("Mysql").GetValue<string>("Database");
-            string connectionString = $"server={server};user={username};password={password};database={database}";
+            string server = Configuration["Server"] ?? "localhost";
+            string port = Configuration["Port"] ?? "3306";
+            string username = Configuration["Username"] ?? "root";
+            string password = Configuration["Password"] ?? "Geheim_101";
+            string database = Configuration["Database"] ?? "Account";
+            string connectionString = $"server={server};Port={port};user={username};password={password};database={database}";
+
             services.AddDbContext<AccountServiceContext>(builder =>
                 builder.UseMySQL(connectionString));
 
